@@ -1,0 +1,7 @@
+one:
+  content: MyText
+  public: false
+
+two:
+  content: MyText
+  public: false
