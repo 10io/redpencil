@@ -9,6 +9,6 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     
     get "/posts/" + posts(:one).id.to_s
     assert_response :success
-    assert_select 'p', :count => 1, :text => 'MyText'
+    assert_select 'pre', :count => 1, :text => 'MyText'
   end
 end

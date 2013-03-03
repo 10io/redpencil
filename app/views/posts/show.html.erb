@@ -1,7 +1,7 @@
 <h1>Post#show</h1>
 <h2><%=@post.created_at.strftime('%d %b. %Y')%>, <%=@post.created_at.strftime('%H:%M')%></h2>
-<p>
-    <%= @post.content %>
-</p>
+<div>
+    <pre><%= @post.content %></pre>
+</div>
 
 <%= link_to 'Posts', posts_path %>
