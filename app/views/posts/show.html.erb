@@ -1,2 +1,7 @@
 <h1>Post#show</h1>
-<p>Find me in app/views/post/show.html.erb</p>
+<h2><%=@post.created_at.strftime('%d %b. %Y')%>, <%=@post.created_at.strftime('%H:%M')%></h2>
+<p>
+    <%= @post.content %>
+</p>
+
+<%= link_to 'Posts', posts_path %>

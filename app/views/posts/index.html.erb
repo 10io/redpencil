@@ -1,6 +1,13 @@
 <h1>All posts</h1>
 <ul>
     <% for p in @posts %>
-    <li><%=p.created_at%></li>
+    <li><%=p.created_at.strftime('%d %b. %Y')%>, <%=p.created_at.strftime('%H:%M')%> 
+        <%= link_to 'Show', p %> |
+        <%= link_to 'Destroy', p,
+                       :confirm => 'Are you sure?',
+                       :method => :delete %>
+    </li>
     <% end %>
+    
+    <%= link_to 'New post', new_post_path %>
 </ul>

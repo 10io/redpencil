@@ -1,0 +1,39 @@
+<%= form_for(@post) do |f| %>
+  <% if @post.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@post.errors.count, "error") %> prohibited
+        this post from being saved:</h2>
+    <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+  
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :public %><br />
+    <%= f.check_box :public %>
+  </div>
+<% end %>
+
+<script>
+var typingTimeout;
+$("#post_content").keypress(function(event) {
+    
+    if (typingTimeout != undefined) {
+        clearTimeout(typingTimeout);
+    }
+    
+    typingTimeout = setTimeout(submitForm, 2000);
+    
+    function submitForm() {
+        alert("Submit now!");
+    }
+});
+</script>
