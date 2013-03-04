@@ -22,27 +22,11 @@ class PostsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, :id => posts(:one).id
-    
-    assert_equal posts(:one), assigns(:post)
-    assert_response :success
-  end
-
   test "should post create" do
     assert_difference('Post.count') do
       post :create, :post => { :content => 'foobar', :public => false }
     end
     
-    assert_redirected_to post_path(assigns(:post))
-  end
-
-  test "should get update" do
-    put :update, :id => posts(:one).id, :post => { :content => 'foobar', :public => true }
-    
-    p = Post.find(posts(:one).id)
-    assert_equal 'foobar', p.reload.content
-    assert p.public
     assert_redirected_to post_path(assigns(:post))
   end
 
