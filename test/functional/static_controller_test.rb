@@ -12,4 +12,16 @@ class StaticControllerTest < ActionController::TestCase
     
     assert_response :success
   end
+  
+  test "get about" do
+    get :about
+    
+    assert_response :success
+  end
+  
+  test "get credits" do
+    get :credits
+    
+    assert_response :success
+  end
 end
