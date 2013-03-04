@@ -1,13 +1,28 @@
-<h1>All posts</h1>
-<ul>
-    <% for p in @posts %>
-    <li><%=p.created_at.strftime('%d %b. %Y')%>, <%=p.created_at.strftime('%H:%M')%> 
-        <%= link_to 'Show', p %> |
-        <%= link_to 'Destroy', p,
-                       :confirm => 'Are you sure?',
-                       :method => :delete %>
-    </li>
-    <% end %>
-    
-    <%= link_to 'New post', new_post_path %>
-</ul>
+<h2>Posts</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Post</th>
+            <th>Excerpt</th>
+            <th>Created</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% for p in @posts %>        
+        <tr>
+            <td><%= link_to "#{p.id}", p %></td>
+            <td><%= link_to "#{sanitize(truncate(p.content), :length => 30)}", p %></td>
+            <td><%=p.created_at.strftime('%d %b. %Y')%>, <%=p.created_at.strftime('%H:%M')%> </td>
+            <td><%= link_to '<i class="icon-remove-sign"></i>'.html_safe, p, :confirm => 'Are you sure?', :method => :delete %></td>
+        </tr>
+        <% end %>
+
+    </tbody>
+</table>
+
+<p>
+    <%= link_to '<i class="icon-plus-sign icon-white"></i> New post'.html_safe, new_post_path, {:class => 'btn btn-success'} %>
+</p>
