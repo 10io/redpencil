@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  attr_accessible :content, :public
+  attr_accessible :content
   
   validates :content, :presence => true
   
