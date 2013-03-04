@@ -1,12 +1,14 @@
-<%= link_to "Red Pencil", root_path, :class => 'brand' %>
-<ul class="nav">
-    <li>
-        <%= link_to('Log in', root_path) %>
-    </li>
-    <li>
-        <%= link_to('About', root_path) %>
-    </li>
-    <li>
-        <%= link_to('Credits', root_path) %>
-    </li>
-</ul>
+<div class="masthead">
+    <ul class="nav nav-pills pull-right">
+        <li>
+            <%= link_to('Log in', root_path) %>
+        </li>
+        <li>
+            <%= link_to('About', root_path) %>
+        </li>
+        <li>
+            <%= link_to('Credits', root_path) %>
+        </li>
+    </ul>
+    <h3 class="muted"><%=image_tag("pencil.png")%><%= link_to "Red Pencil", root_path, :class => 'brand' %></h3>
+</div>
