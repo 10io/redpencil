@@ -5,7 +5,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     get "/posts"
     assert_response :success
     assert assigns(:posts)
-    assert_select 'ul li', 2
+    assert_select 'table.table tbody tr', 2
     
     get "/posts/" + posts(:one).id.to_s
     assert_response :success
@@ -15,16 +15,16 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
   test "Browse index, then the posts lists and create a new one" do
     get "/"
     assert_response :success
-    assert_select 'h1', :text => 'Index page!'
+    assert_select 'h1', :text => 'What could you do with a red pencil?'
     
     get "/posts"
     assert_response :success
     assert assigns(:posts)
-    assert_select 'ul li', 2
+    assert_select 'table.table tbody tr', 2
     
     get "/posts/new"
     assert_response :success
     assert assigns(:post)
-    assert_select 'h1', :text => 'Post#new'
+    assert_select 'h2', :text => 'New Post'
   end
 end
