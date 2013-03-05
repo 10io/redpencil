@@ -1,7 +1,7 @@
-<h1>Post#show</h1>
-<h2><%=@post.created_at.strftime('%d %b. %Y')%>, <%=@post.created_at.strftime('%H:%M')%></h2>
+<h2>Post created on <%=@post.created_at.strftime('%d %b. %Y')%>, <%=@post.created_at.strftime('%H:%M')%></h2>
 <div>
     <pre><%= @post.content %></pre>
 </div>
 
-<%= link_to 'Posts', posts_path %>
+<%= link_to '<i class="icon-plus-sign icon-white"></i> New post'.html_safe, new_post_path, {:class => 'btn btn-success'} %>
+<%= link_to '<i class="icon-list icon-white"></i> All posts'.html_safe, posts_path, {:class => 'btn btn-success'} %>
