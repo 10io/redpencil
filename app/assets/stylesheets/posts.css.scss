@@ -1,4 +1,15 @@
-textarea.new_post {
+textarea#post_content {
+    position: absolute;
     width: 690px;
     height: 200px;
+    z-index: 110;
+}
+
+div#overlay {
+    background: #000; 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    z-index: 100;
 }
