@@ -19,7 +19,7 @@ maxLength = 4 * 60 * 1000
     )
 
     $("#post_content").keydown((event)->
-        event.preventDefault() if event.which == 8 || event.which == 9
+        event.preventDefault() if event.which in [8, 9, 37, 38, 39, 40]
     )
     
     
