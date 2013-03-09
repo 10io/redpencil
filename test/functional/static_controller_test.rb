@@ -7,12 +7,6 @@ class StaticControllerTest < ActionController::TestCase
     assert_response :success
   end
   
-  test "get new_post" do
-    get :new_post
-    
-    assert_response :success
-  end
-  
   test "get about" do
     get :about
     
