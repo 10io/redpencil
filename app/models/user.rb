@@ -1,5 +1,3 @@
-require 'bcrypt'
-
 class User < ActiveRecord::Base
   attr_accessible :email, :token, :token_consumed, :token_created_at
   
@@ -7,7 +5,7 @@ class User < ActiveRecord::Base
   
   def generate_token
     code = SecureRandom.hex(32).to_s
-    self.token = BCrypt::Password.create(code)
+    self.token = Digest::SHA256.new.hexdigest(code)
     self.token_created_at = Time.now
     self.token_consumed = false
 
@@ -16,7 +14,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_by_token(token)
-    u = User.where(:token => token).first
+    u = User.where(:token => Digest::SHA256.new.hexdigest(token)).first
     return nil if u.nil?
     
     raise Exceptions::TokenAlreadyConsumed if u.token_consumed

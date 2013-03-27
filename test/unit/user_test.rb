@@ -55,7 +55,7 @@ class UserTest < ActiveSupport::TestCase
   end
   
   test "find by token" do
-    u = User.find_by_token(users(:valid_token).token)
+    u = User.find_by_token('validtoken')
     
     assert_equal users(:valid_token), u
   end
@@ -68,7 +68,7 @@ class UserTest < ActiveSupport::TestCase
   
   test "find by already consumed token" do
     begin
-      User.find_by_token(users(:already_consumed_token).token)
+      User.find_by_token('alreadyconsumedtoken')
       fail 'Expected to throw Exceptions::TokenAlreadyConsumed'
     rescue Exceptions::TokenAlreadyConsumed
       #nothing to do, expected behavior
@@ -77,11 +77,22 @@ class UserTest < ActiveSupport::TestCase
   
   test "find by expired token" do
     begin
-      User.find_by_token(users(:expired_token).token)
+      User.find_by_token('expiredtoken')
       fail 'Expected to throw Exceptions::TokenExpired'
     rescue Exceptions::TokenExpired
       #nothing to do, expected behavior
     end
+  end
+  
+  test "generate and find by token" do
+    t = users(:valid).generate_token
+    
+    assert users(:valid).token
+    assert users(:valid).token_created_at
+    assert !users(:valid).token_consumed
+    
+    u = User.find_by_token (t)
+    assert_equal u, users(:valid)
   end
   
 end
