@@ -1,7 +1,23 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+valid:
+    email: foo@bar.net
 
-one:
-  email: MyString
+invalid:
+    email: invalid@email.com!
 
-two:
-  email: MyString
+valid_code:
+    email: valid_code@user.net
+    hashed_code: hashedvalidcode
+    activated: false
+    activated_at: <%= 5.seconds.ago %>
+
+activated_code:
+    email: activated_code@user.net
+    hashed_code: hashedactivatedcode
+    activated: true
+    activated_at: <%= 5.seconds.ago %>
+
+expired_code:
+    email: activated_code@user.net
+    hashed_code: hashedexpiredcode
+    activated: false
+    activated_at: <%= (PasswordlessConfig.config[:code_validity_period] + 100).seconds.ago %>
