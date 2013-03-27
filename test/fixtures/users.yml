@@ -4,20 +4,20 @@ valid:
 invalid:
     email: invalid@email.com!
 
-valid_code:
-    email: valid_code@user.net
-    hashed_code: hashedvalidcode
-    activated: false
-    activated_at: <%= 5.seconds.ago %>
+valid_token:
+    email: token_valid@user.net
+    token: hashedvalidtoken
+    token_consumed: false
+    token_created_at: <%= 5.seconds.ago %>
 
-activated_code:
-    email: activated_code@user.net
-    hashed_code: hashedactivatedcode
-    activated: true
-    activated_at: <%= 5.seconds.ago %>
+already_consumed_token:
+    email: token_consumed_code@user.net
+    token: hashedconsumedtoken
+    token_consumed: true
+    token_created_at: <%= 5.seconds.ago %>
 
-expired_code:
-    email: activated_code@user.net
-    hashed_code: hashedexpiredcode
-    activated: false
-    activated_at: <%= (PasswordlessConfig.config[:code_validity_period] + 100).seconds.ago %>
+expired_token:
+    email: token_expired_code@user.net
+    token: hashedexpiredtoken
+    token_consumed: false
+    token_created_at: <%= (PasswordlessConfig.config[:token_validity_period] + 100).seconds.ago %>

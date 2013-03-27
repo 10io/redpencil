@@ -1,6 +1,6 @@
 #application wide exceptions
 module Exceptions
-  class CodeGenerationError < StandardError; end  
-  class CodeAlreadyActivated < StandardError; end
-  class CodeExpired < StandardError; end
+  class TokenGenerationError < StandardError; end  
+  class TokenAlreadyConsumed < StandardError; end
+  class TokenExpired < StandardError; end
 end
