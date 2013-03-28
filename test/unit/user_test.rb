@@ -40,7 +40,7 @@ class UserTest < ActiveSupport::TestCase
   test "generates a new token" do
     c = users(:valid).generate_token
     
-    assert users(:valid).token
+    assert users(:valid).token_hash
     assert users(:valid).token_created_at
     assert !users(:valid).token_consumed
   end
@@ -87,7 +87,7 @@ class UserTest < ActiveSupport::TestCase
   test "generate and find by token" do
     t = users(:valid).generate_token
     
-    assert users(:valid).token
+    assert users(:valid).token_hash
     assert users(:valid).token_created_at
     assert !users(:valid).token_consumed
     

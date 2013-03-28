@@ -6,18 +6,18 @@ invalid:
 
 valid_token:
     email: token_valid@user.net
-    token: <%= Digest::SHA256.new.hexdigest("validtoken") %>
+    token_hash: <%= Digest::SHA256.new.hexdigest("validtoken") %>
     token_consumed: false
     token_created_at: <%= 5.seconds.ago %>
 
 already_consumed_token:
     email: token_consumed_code@user.net
-    token: <%= Digest::SHA256.new.hexdigest("alreadyconsumedtoken") %>
+    token_hash: <%= Digest::SHA256.new.hexdigest("alreadyconsumedtoken") %>
     token_consumed: true
     token_created_at: <%= 5.seconds.ago %>
 
 expired_token:
     email: token_expired_code@user.net
-    token: <%= Digest::SHA256.new.hexdigest("expiredtoken") %>
+    token_hash: <%= Digest::SHA256.new.hexdigest("expiredtoken") %>
     token_consumed: false
     token_created_at: <%= (PasswordlessConfig.config[:token_validity_period] + 100).seconds.ago %>
