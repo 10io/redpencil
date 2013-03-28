@@ -1,5 +1,7 @@
 one:
   content: MyText
+  user: valid
 
 two:
   content: MyText
+  user: valid

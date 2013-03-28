@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
   
   validates :email, :presence => true, :uniqueness => true, :email => true
   
+  has_many :posts, :dependent => :destroy
+  
   def generate_token
     token = SecureRandom.hex(32).to_s
     self.token_hash = Digest::SHA256.new.hexdigest(token)
