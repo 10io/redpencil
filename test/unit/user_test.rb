@@ -1,6 +1,19 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
+  
+  test "find by valid email" do
+    u = User.find_by_email(users(:valid).email)
+    
+    assert_equal users(:valid), u
+  end
+  
+  test "dont find by invalid email" do
+    u = User.find_by_email('unknownemail@sandbox.net')
+    
+    assert u.nil?
+  end
+  
   test "create valid user" do
     u = User.new({:email => 'foo2@bar.net'})
     
