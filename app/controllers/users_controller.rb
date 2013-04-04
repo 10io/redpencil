@@ -46,6 +46,9 @@ class UsersController < ApplicationController
   end
 
   def logout
+    reset_session
+    session[:passwordless_id] = nil
+    redirect_to root_path, :notice => "You logout successfully!"
   end
   
 end

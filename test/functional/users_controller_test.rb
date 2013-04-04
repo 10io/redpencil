@@ -39,10 +39,52 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_equal "Something wrong happened. Try to login again.", flash[:alert]
   end
+  
+  test "should get check valid token" do
+    get :check, :token => "validtoken"
+    
+    assert_response :redirect
+    assert_equal "Welcome back, #{users(:valid_token).email}", flash[:notice]
+    assert_equal nil, flash[:alert]
+    assert !session[:passwordless_id].nil?
+  end
+  
+  test "should get check already consumed token" do
+    get :check, :token => "alreadyconsumedtoken"
+    
+    assert_response :redirect
+    assert_equal "Your login link has already been used. Try to login again and we will send you a new link.", flash[:alert]
+    assert session[:passwordless_id].nil?
+  end
+  
+  test "should get check expired token" do
+    get :check, :token => "expiredtoken"
+    
+    assert_response :redirect
+    assert_equal "Your login link has expired. Try to login again and we will send you a new link.", flash[:alert]
+    assert session[:passwordless_id].nil?
+  end
+  
+  test "should get check without param" do
+    get :check
+    
+    assert_response :redirect
+    assert_equal "Something wrong happened. Try to login again and we will send you a new link.", flash[:alert]
+    assert session[:passwordless_id].nil?
+  end
+  
+  test "should get check unknown token" do
+    get :check, :token => "unknown token"
+    
+    assert_response :redirect
+    assert_equal "Something wrong happened. Try to login again and we will send you a new link.", flash[:alert]
+    assert session[:passwordless_id].nil?
+  end
 
   test "should get logout" do
     get :logout
-    assert_response :success
+    assert_response :redirect
+    assert_equal "You logout successfully!", flash[:notice]
   end
-
+  
 end
