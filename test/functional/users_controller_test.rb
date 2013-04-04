@@ -7,7 +7,7 @@ class UsersControllerTest < ActionController::TestCase
   
   test "should get login known user" do
     email_address = users(:valid).email
-    get :login, :email => email_address
+    post :login, :email => email_address
     
     assert_response :redirect
     assert_equal "A login link has been sent to #{email_address}. Check your mailbox! (Don't forget to look in your spam folder)", flash[:notice]
@@ -21,7 +21,7 @@ class UsersControllerTest < ActionController::TestCase
   
   test "should get login unknown user" do
     email_address = "foobarish@sandbox.net"
-    get :login, :email => email_address
+    post :login, :email => email_address
     
     assert_response :redirect
     assert_equal "A login link has been sent to #{email_address}. Check your mailbox! (Don't forget to look in your spam folder)", flash[:notice]
@@ -34,7 +34,7 @@ class UsersControllerTest < ActionController::TestCase
   end
   
   test "should get login without param" do
-    get :login
+    post :login
     
     assert_response :redirect
     assert_equal "Something wrong happened. Try to login again.", flash[:alert]
@@ -46,7 +46,7 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_equal "Welcome back, #{users(:valid_token).email}", flash[:notice]
     assert_equal nil, flash[:alert]
-    assert !session[:passwordless_id].nil?
+    assert !session[:passwordless_uid].nil?
   end
   
   test "should get check already consumed token" do
@@ -54,7 +54,7 @@ class UsersControllerTest < ActionController::TestCase
     
     assert_response :redirect
     assert_equal "Your login link has already been used. Try to login again and we will send you a new link.", flash[:alert]
-    assert session[:passwordless_id].nil?
+    assert session[:passwordless_uid].nil?
   end
   
   test "should get check expired token" do
@@ -62,7 +62,7 @@ class UsersControllerTest < ActionController::TestCase
     
     assert_response :redirect
     assert_equal "Your login link has expired. Try to login again and we will send you a new link.", flash[:alert]
-    assert session[:passwordless_id].nil?
+    assert session[:passwordless_uid].nil?
   end
   
   test "should get check without param" do
@@ -70,7 +70,7 @@ class UsersControllerTest < ActionController::TestCase
     
     assert_response :redirect
     assert_equal "Something wrong happened. Try to login again and we will send you a new link.", flash[:alert]
-    assert session[:passwordless_id].nil?
+    assert session[:passwordless_uid].nil?
   end
   
   test "should get check unknown token" do
@@ -78,11 +78,11 @@ class UsersControllerTest < ActionController::TestCase
     
     assert_response :redirect
     assert_equal "Something wrong happened. Try to login again and we will send you a new link.", flash[:alert]
-    assert session[:passwordless_id].nil?
+    assert session[:passwordless_uid].nil?
   end
 
   test "should get logout" do
-    get :logout
+    post :logout
     assert_response :redirect
     assert_equal "You logout successfully!", flash[:notice]
   end

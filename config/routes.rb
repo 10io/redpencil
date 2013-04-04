@@ -4,11 +4,11 @@ Redpencil::Application.routes.draw do
   
   resources :posts, :except => [:edit, :update]
   
-  get "users/login"
+  post "users/login"
 
   get "users/check"
 
-  get "users/logout"
+  post "users/logout"
   
   get ':action' => 'static#:action'
   

@@ -32,7 +32,7 @@ class UsersController < ApplicationController
         
         if !u.nil?
           reset_session
-          session[:passwordless_id] = u.id
+          session[:passwordless_uid] = u.id
           flash[:notice] = "Welcome back, #{u.email}"
           flash[:alert] = nil
         end
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
   def logout
     reset_session
-    session[:passwordless_id] = nil
+    session[:passwordless_uid] = nil
     redirect_to root_path, :notice => "You logout successfully!"
   end
   
