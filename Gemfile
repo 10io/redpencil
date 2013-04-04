@@ -32,3 +32,5 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 
 gem 'unicorn'
+
+gem 'newrelic_rpm'
