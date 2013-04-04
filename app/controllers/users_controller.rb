@@ -36,6 +36,8 @@ class UsersController < ApplicationController
           session[:passwordless_uid] = u.id
           flash[:notice] = "Welcome back, #{u.email}"
           flash[:alert] = nil
+          redirect_to posts_url
+          return
         end
       rescue Exceptions::TokenAlreadyConsumed
         flash[:alert] = "Your login link has already been used. Try to login again and we will send you a new link."

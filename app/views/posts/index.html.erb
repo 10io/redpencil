@@ -16,7 +16,7 @@
             <td><%= link_to "#{p.id}", p %></td>
             <td><%= link_to "#{sanitize(truncate(p.content), :length => 30)}", p %></td>
             <td><%=p.created_at.strftime('%d %b. %Y')%>, <%=p.created_at.strftime('%H:%M')%> </td>
-            <td><%= link_to '<i class="icon-remove-sign"></i>'.html_safe, p, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to '<i class="icon-remove-sign icon-white"></i>'.html_safe, p, :confirm => 'Are you sure?', :method => :delete %></td>
         </tr>
         <% end %>
 

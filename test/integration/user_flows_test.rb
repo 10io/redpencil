@@ -21,7 +21,7 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     login(:valid)
     get "/"
     assert_response :success
-    assert_select 'h1', :text => 'What could you do with a red pencil?'
+    assert_select 'h1', :text => 'Freewriting'
     
     get "/posts"
     assert_response :success

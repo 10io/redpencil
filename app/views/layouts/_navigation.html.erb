@@ -2,7 +2,16 @@
     <ul class="nav nav-pills pull-right">
         <li>
             <% if logged_in? %>
-                <%= link_to('Logout', '/users/logout') %>
+                <div class="btn-group">
+                  <a class="btn btn-primary" href="/posts"><i class="icon-user icon-white"></i> <%= current_user.email %></a>
+                  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/posts"><i class="icon-th-list"></i> Posts</a></li>
+                    <li><a href="/users/logout"><i class="icon-remove"></i> Logout</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+                  </ul>
+                </div>
             <% else %>
                 <%= form_tag('/users/login', :class => "form-inline") do %>
                     <div class="input-append">
@@ -16,8 +25,8 @@
             <%= link_to('About', 'about') %>
         </li>
         <li>
-            <%= link_to('Credits', root_path) %>
+            <%= link_to('Credits', 'credits') %>
         </li>
     </ul>
-    <h3 class="muted"><%=image_tag("pencil.png")%><%= link_to "Red Pencil", root_path, :class => 'brand' %></h3>
+    <h1 class="muted"><%= link_to "Red Pencil", root_path, :class => 'brand' %></h1>
 </div>
