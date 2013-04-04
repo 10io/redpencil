@@ -17,6 +17,7 @@ class UsersController < ApplicationController
       
       rescue Exceptions::TokenGenerationError
         flash[:alert] = "Something wrong happened. Try to login again."
+        flash[:alert] = u.errors.full_messages.first if u.invalid?
       end
     else
       flash[:alert] = "Something wrong happened. Try to login again."
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
   def logout
     reset_session
     session[:passwordless_uid] = nil
-    redirect_to root_path, :notice => "You logout successfully!"
+    redirect_to root_path, :notice => "You have been logout successfully!"
   end
   
 end

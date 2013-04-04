@@ -1,7 +1,16 @@
 <div class="masthead">
     <ul class="nav nav-pills pull-right">
         <li>
-            <%= link_to('Log in', root_path) %>
+            <% if logged_in? %>
+                <%= link_to('Logout', '/users/logout') %>
+            <% else %>
+                <%= form_tag('/users/login', :class => "form-inline") do %>
+                    <div class="input-append">
+                        <%= text_field_tag :email, nil, :placeholder => 'Your email', :class => "input-small", :type => "email", :id => "appendedInputButton" %>
+                        <%= submit_tag 'Go', :class => "btn btn-primary" %>
+                    </div>
+                <% end %>
+            <% end %>
         </li>
         <li>
             <%= link_to('About', 'about') %>

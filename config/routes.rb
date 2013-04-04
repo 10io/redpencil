@@ -8,7 +8,7 @@ Redpencil::Application.routes.draw do
 
   get "users/check"
 
-  post "users/logout"
+  get "users/logout"
   
   get ':action' => 'static#:action'
   

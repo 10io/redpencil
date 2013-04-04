@@ -33,6 +33,13 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal [u.email], email.to
   end
   
+  test "should get login invalid email" do
+    post :login, :email => "this_is_not_an_email_address"
+    
+    assert_response :redirect
+    assert_equal "Email this_is_not_an_email_address is not a valid email address.", flash[:alert]
+  end
+  
   test "should get login without param" do
     post :login
     
@@ -82,9 +89,9 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get logout" do
-    post :logout
+    get :logout
     assert_response :redirect
-    assert_equal "You logout successfully!", flash[:notice]
+    assert_equal "You have been logout successfully!", flash[:notice]
   end
   
 end
