@@ -32,6 +32,20 @@ class PostsControllerTest < ActionController::TestCase
     assert assigns(:post)
     assert_response :success
   end
+  
+  test "should not get new without uid" do
+    get :new
+    
+    assert_response :redirect
+    assert_equal "You must be logged in to access this page", flash[:alert]
+  end
+  
+  test "should get new demo mode" do
+    get :new, :demo => "1"
+    
+    assert assigns(:post)
+    assert_response :success
+  end
 
   test "should post create" do
     session[:passwordless_uid] = users(:valid).id
@@ -40,6 +54,21 @@ class PostsControllerTest < ActionController::TestCase
     end
     
     assert_redirected_to post_path(assigns(:post))
+  end
+  
+  test "should not post create without uid" do
+    post :create, :post => { :content => 'foobar' }
+    
+    assert_response :redirect
+    assert_equal "You must be logged in to access this page", flash[:alert]
+  end
+  
+  test "should post create demo mode" do
+    assert_no_difference('Post.count') do
+      post :create, :post => { :content => 'foobar' }, :demo => "1"
+    end
+    
+    assert_template "demo" 
   end
 
   test "should get destroy" do

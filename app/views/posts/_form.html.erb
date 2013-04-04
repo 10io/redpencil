@@ -14,4 +14,7 @@
     <div class="field">
         <%= f.text_area :content, :size => "80x30" %>
     </div>
+    <% if !logged_in? %>
+        <%= hidden_field_tag('demo', '1')%>
+    <% end %>
 <% end %>

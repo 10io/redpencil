@@ -22,6 +22,11 @@ class PostsController < ApplicationController
     @post = Post.new(params[:post])
     @post.user = current_user
     
+    if demo?
+      render "demo"
+      return
+    end
+    
     if @post.save
       redirect_to @post, :notice => 'Post successfully created.'
     else
@@ -43,6 +48,10 @@ class PostsController < ApplicationController
   private
  
     def require_login
-      redirect_to root_path, :alert => 'You must be logged in to access this page' unless logged_in?
+      redirect_to root_path, :alert => 'You must be logged in to access this page' unless logged_in? or demo?
+    end
+    
+    def demo?
+      ["new", "create"].include?(params[:action]) and params[:demo] == "1"
     end
 end
