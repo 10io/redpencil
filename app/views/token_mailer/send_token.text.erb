@@ -1,0 +1,14 @@
+Hello!
+
+We received a login request for <%= @user.email%>
+
+In order to login into <%=Rails.application.class.to_s.split('::').first%>, please follow this link:
+<%= @url %>
+
+This link is valid for the next 5 minutes.
+
+If you didn't ask for a login link, please ignore this email.
+
+Thanks and have a great day!
+
+- The <%=Rails.application.class.to_s.split('::').first%> team

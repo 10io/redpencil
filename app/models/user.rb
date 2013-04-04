@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
   
   def self.find_by_token(token)
-    u = User.where(:token_hash => Digest::SHA256.new.hexdigest(token)).first
+    u = User.find_by_token_hash(Digest::SHA256.new.hexdigest(token))
     return nil if u.nil?
     
     raise Exceptions::TokenAlreadyConsumed if u.token_consumed
