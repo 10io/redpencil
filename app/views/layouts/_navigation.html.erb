@@ -9,7 +9,7 @@
                     <li><a href="/posts"><i class="icon-th-list"></i> Posts</a></li>
                     <li><a href="/users/logout"><i class="icon-remove"></i> Logout</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="icon-trash"></i> Delete</a></li>
+                    <li><%= link_to("<i class=\"icon-trash\"></i> <span class=\"label label-warning\">Delete</span>".html_safe, '/users/destroy', :method => :delete, :confirm => "Are you sure you want to delete your user and all your posts?") %></li>
                   </ul>
                 </div>
             <% else %>
