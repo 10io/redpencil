@@ -85,7 +85,6 @@ class PostsControllerTest < ActionController::TestCase
     assert_redirected_to posts_path
   end
   
-  
   test "should get destroy wrong user" do
     session[:passwordless_uid] = users(:valid_token).id
     get :destroy, :id => posts(:one).id

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :only => [:destroy]
   
   def login
     if params[:email]
@@ -49,9 +50,22 @@ class UsersController < ApplicationController
   end
 
   def logout
-    reset_session
-    session[:passwordless_uid] = nil
+    remove_session
     redirect_to root_path, :notice => "You have been logout successfully!"
   end
   
+  def destroy
+    if current_user
+      remove_session
+      current_user.destroy
+      redirect_to root_path, :alert => "Your user and all your posts have been deleted!"
+    end
+  end
+  
+  private
+  
+  def remove_session
+    reset_session
+    session[:passwordless_uid] = nil
+  end
 end

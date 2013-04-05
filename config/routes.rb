@@ -10,6 +10,8 @@ Redpencil::Application.routes.draw do
 
   get "users/logout"
   
+  delete "users/destroy"
+  
   get ':action' => 'static#:action'
   
 end

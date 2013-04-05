@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
   def logged_in?
     current_user != nil
   end
+  
+  def require_login
+    redirect_to root_path, :alert => 'You must be logged in to access this page' unless logged_in? or demo?
+  end
+  
+  def demo?
+    ["new", "create"].include?(params[:action]) and params[:demo] == "1"
+  end
 end

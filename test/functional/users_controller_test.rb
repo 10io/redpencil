@@ -94,4 +94,24 @@ class UsersControllerTest < ActionController::TestCase
     assert_equal "You have been logout successfully!", flash[:notice]
   end
   
+  test "should delete destroy without user" do
+    delete :destroy
+    
+    assert_response :redirect
+  end
+  
+  test "should delete destroy" do
+    uid = users(:valid).id
+    p1id = users(:valid).posts.first
+    p2id = users(:valid).posts.second
+    session[:passwordless_uid] = uid
+    
+    delete :destroy
+    
+    assert_response :redirect
+    assert_equal "Your user and all your posts have been deleted!", flash[:alert]
+    assert User.find_by_id(uid).nil?
+    assert Post.find_by_id(p1id).nil?
+    assert Post.find_by_id(p2id).nil?
+  end
 end
